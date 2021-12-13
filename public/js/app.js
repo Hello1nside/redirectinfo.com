@@ -5461,9 +5461,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log('Example component mounted.');
+  data: function data() {
+    return {
+      redirectDetectiveServiceURL: 'https://service.redirectinfo.com',
+      domainName: null,
+      redirects: null
+    };
+  },
+  mounted: function mounted() {// console.log('Example component mounted.')
+  },
+  methods: {
+    getRedirects: function getRedirects() {
+      var _this = this;
+
+      if (!this.domainName) {
+        return false;
+      }
+
+      console.log('method called');
+      axios.get(this.redirectDetectiveServiceURL + '?site=' + this.domainName).then(function (response) {
+        return _this.redirects = response;
+      });
+    },
+    isValidDomain: function isValidDomain() {}
   }
 });
 
@@ -23032,56 +23061,68 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      { staticClass: "flex justify-center mt-20 mb-20 mx-auto w-3/4" },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "text-center p-4 sm:justify-between sm:p-12 bg-primary-100 rounded-md w-3/4",
-          },
-          [
-            _c(
-              "h1",
-              { staticClass: "text-4xl font-bold text-primary-500 mb-5" },
-              [_vm._v("URL Redirect Checker")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "text-2xl font-semibold flex justify-center" },
-              [
-                _c("input", {
-                  staticClass:
-                    "rounded-md px-4 focus:outline-none border border-gray-500 focus:border-primary-600 w-3/6",
-                  attrs: { type: "text", placeholder: "https://domain.com" },
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
+  return _c(
+    "section",
+    { staticClass: "flex justify-center mt-20 mb-20 mx-auto w-3/4" },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "text-center p-4 sm:justify-between sm:p-12 bg-primary-100 rounded-md w-3/4",
+        },
+        [
+          _c(
+            "h1",
+            { staticClass: "text-4xl font-bold text-primary-500 mb-5" },
+            [_vm._v("URL Redirect Checker")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "text-2xl font-semibold flex justify-center" },
+            [
+              _c("input", {
+                directives: [
                   {
-                    staticClass:
-                      "bg-primary-600 hover:bg-primary-700 text-white rounded-md px-4 py-2 cursor-pointer ml-5",
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.domainName,
+                    expression: "domainName",
                   },
-                  [_vm._v("Trace URL")]
-                ),
-              ]
-            ),
-          ]
-        ),
-      ]
-    )
-  },
-]
+                ],
+                staticClass:
+                  "rounded-md px-4 focus:outline-none border border-gray-500 focus:border-primary-600 w-3/6",
+                attrs: { type: "text", placeholder: "https://domain.com" },
+                domProps: { value: _vm.domainName },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.domainName = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-primary-600 hover:bg-primary-700 text-white rounded-md px-4 py-2 cursor-pointer ml-5",
+                  on: { click: _vm.getRedirects },
+                },
+                [_vm._v("Trace URL")]
+              ),
+            ]
+          ),
+          _vm._v("\n        " + _vm._s(_vm.redirects) + "\n    "),
+        ]
+      ),
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
