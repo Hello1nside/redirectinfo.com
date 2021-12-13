@@ -5469,12 +5469,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       redirectDetectiveServiceURL: 'https://service.redirectinfo.com',
       domainName: null,
-      redirects: null
+      redirects: null,
+      loading: false
     };
   },
   mounted: function mounted() {// console.log('Example component mounted.')
@@ -5487,12 +5499,13 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
-      console.log('method called');
+      this.redirects = null;
+      this.loading = true;
       axios.get(this.redirectDetectiveServiceURL + '?site=' + this.domainName).then(function (response) {
-        return _this.redirects = response;
+        _this.redirects = response.data.response;
+        _this.loading = false;
       });
-    },
-    isValidDomain: function isValidDomain() {}
+    }
   }
 });
 
@@ -5536,8 +5549,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -23116,7 +23129,36 @@ var render = function () {
               ),
             ]
           ),
-          _vm._v("\n        " + _vm._s(_vm.redirects) + "\n    "),
+          _vm._v(" "),
+          _vm.loading
+            ? _c("p", { staticClass: "mt-5" }, [_vm._v("Loading ... ")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.redirects
+            ? _c("div", { staticClass: "redirects" }, [
+                _c("table", { staticClass: "flex justify-center mt-10" }, [
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.redirects, function (redirect) {
+                      return _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-gray-300 px-10 py-3" },
+                          [_vm._v(_vm._s(redirect.url))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-gray-300 px-10 py-3" },
+                          [_vm._v(_vm._s(redirect.code))]
+                        ),
+                      ])
+                    }),
+                    0
+                  ),
+                ]),
+              ])
+            : _vm._e(),
         ]
       ),
     ]

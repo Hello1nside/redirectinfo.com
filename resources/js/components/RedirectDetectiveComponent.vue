@@ -14,7 +14,18 @@
                     class="bg-primary-600 hover:bg-primary-700 text-white rounded-md px-4 py-2 cursor-pointer ml-5"
                 >Trace URL</button>
             </div>
-            {{ redirects }}
+            <p v-if="loading" class="mt-5">Loading ... </p>
+
+            <div class="redirects" v-if="redirects">
+                <table class="flex justify-center mt-10">
+                    <tbody>
+                        <tr v-for="redirect in redirects">
+                            <td class="border border-gray-300 px-10 py-3">{{ redirect.url }}</td>
+                            <td class="border border-gray-300 px-10 py-3">{{ redirect.code }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 </template>
@@ -26,6 +37,7 @@ export default {
             redirectDetectiveServiceURL: 'https://service.redirectinfo.com',
             domainName: null,
             redirects: null,
+            loading: false,
         }
     },
     mounted() {
@@ -34,10 +46,15 @@ export default {
     methods: {
         getRedirects() {
             if (!this.domainName) { return false; }
+            this.redirects = null;
+            this.loading = true;
 
             axios
                 .get(this.redirectDetectiveServiceURL + '?site=' + this.domainName)
-                .then(response => (this.redirects = response));
+                .then(response => {
+                    this.redirects = response.data.response;
+                    this.loading = false;
+            });
         },
     }
 }
