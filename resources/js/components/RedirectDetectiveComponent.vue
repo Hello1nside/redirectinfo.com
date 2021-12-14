@@ -8,7 +8,7 @@
                     type="text"
                     placeholder="https://domain.com"
                     v-model="domainName"
-                    @:keyup.13="getRedirects"
+                    @keyup.13="getRedirects"
                 >
                 <button
                     @click="getRedirects"
