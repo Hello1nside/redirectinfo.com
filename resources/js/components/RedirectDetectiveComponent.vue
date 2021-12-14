@@ -8,6 +8,7 @@
                     type="text"
                     placeholder="https://domain.com"
                     v-model="domainName"
+                    @:keyup.13="getRedirects"
                 >
                 <button
                     @click="getRedirects"
@@ -19,10 +20,10 @@
             <div class="redirects" v-if="redirects">
                 <table class="flex justify-center mt-10">
                     <tbody>
-                        <tr v-for="redirect in redirects">
-                            <td class="border border-gray-300 px-10 py-3">{{ redirect.url }}</td>
-                            <td class="border border-gray-300 px-10 py-3">{{ redirect.code }}</td>
-                        </tr>
+                    <tr v-for="redirect in redirects">
+                        <td class="flex justify-start border border-gray-300 px-10 py-3">{{ redirect.url }}</td>
+                        <td class="border border-gray-300 px-10 py-3">{{ redirect.code }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -54,7 +55,7 @@ export default {
                 .then(response => {
                     this.redirects = response.data.response;
                     this.loading = false;
-            });
+                });
         },
     }
 }
