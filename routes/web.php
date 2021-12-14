@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\WebServerController;
+use App\Http\Controllers\RedirectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +18,11 @@ use App\Http\Controllers\IndexController;
 
 Route::get('/', [IndexController::class, 'index']);
 
-Route::get('web-servers', function () {
-    return 'web-servers';
-});
+Route::get('/web-servers/', [WebServerController::class, 'index']);
 
-Route::get('web-server/{name}', function () {
-    return 'web-server/{name}';
-});
+Route::get('/web-servers/{name}/', [WebServerController::class, 'show']);
 
-Route::get('redirect/{name}', function () {
-    return 'redirect/{name}';
-});
+Route::get('/redirect/{name}/', [RedirectController::class, 'index']);
 
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RedirectSingleController extends Controller
+class RedirectController extends Controller
 {
     public function index(Request $request, $server, $redirect) {
         $data = [

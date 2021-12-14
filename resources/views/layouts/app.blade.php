@@ -21,7 +21,7 @@
         <div class="max-w-screen-lg mx-auto px-3 py-6">
             <div class="jsx-4057204961 flex flex-wrap justify-between items-center">
                 <div class="jsx-4057204961">
-                    <a class="jsx-4057204961" href="/demo/nextjs-landing-page/">
+                    <a class="jsx-4057204961" href="/">
                         <span class="text-gray-900 inline-flex items-center font-semibold text-2xl">
                             <svg class="text-primary-500 stroke-current mr-1" xmlns="http://www.w3.org/2000/svg"
                                  width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
@@ -32,7 +32,9 @@
 
                 <nav class="jsx-4057204961">
                     <ul class="jsx-4057204961 navbar flex items-center font-medium text-xl text-gray-800">
-                        <li><a href="/">Home</a></li>
+                        <li class="mr-10"><a href="/">Home</a></li>
+                        <li class="mr-10"><a href="/web-servers/apache/">Apache Redirects</a></li>
+                        <li class=""><a href="/web-servers/nginx/">NGiNX Redirects</a></li>
                     </ul>
                 </nav>
             </div>
